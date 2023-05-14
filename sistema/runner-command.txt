@@ -1,0 +1,6 @@
+# Laravel Docker Commands
+docker-compose exec myapp php artisan serve
+docker-compose exec myapp php artisan migrate:refresh
+
+# MySQL Docker Commands
+docker-compose exec -it mysql bash

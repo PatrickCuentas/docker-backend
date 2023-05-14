@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+
+  laravel:
+    build: .
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+  db:
+    image: mariadb
+    restart: always
+    volumes:
+      - './mysql_data:/var/lib/mysql'
+      - './dev/mariadb:/docker-entrypoint-initdb.d'
+    environment:
+      - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+      - MYSQL_DATABASE=laravel
+
+  nginx:
+    image: 'jc21/nginx-proxy-manager:latest'
+    restart: unless-stopped
+    ports:
+      - '80:80'
+      - '6969:81'
+      - '443:443'
